@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Referral\InviteRequest;
 use App\Mail\ReferralInvitation;
 use App\Models\UserReferralInvite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class ReferralController extends Controller
@@ -18,20 +18,7 @@ class ReferralController extends Controller
         ]);
     }
 
-    public function invite(Request $request) {
-        $this->validate($request, [
-            'emails' => 'required|array',
-            'emails.*' => [
-                'string',
-                'distinct',
-                'email',
-                'unique:users,email',
-                Rule::unique('user_referral_invites', 'email')
-                    ->where(fn ($query) => $query->where('user_id', Auth::user()->id))
-            ],
-        ]);
-
-        // dd($request->emails);
+    public function invite(InviteRequest $request) {
         foreach ($request->emails as $recipient) {
             UserReferralInvite::create([
                 'email' => $recipient,

@@ -16,7 +16,7 @@ class AddReferralColumnsToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('referral_code')->unique();
             $table->integer('referral_point')->default(0);
-            $table->string('referred_by')->nullable();
+            $table->foreignId('referred_by')->nullable()->constrained('users');
         });
     }
 
