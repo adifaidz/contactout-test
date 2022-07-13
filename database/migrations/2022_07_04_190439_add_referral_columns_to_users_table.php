@@ -28,6 +28,7 @@ class AddReferralColumnsToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['referred_by']);
             $table->dropColumn([
                 'referral_code',
                 'referral_point',

@@ -103,7 +103,7 @@ export default function InviteForm() {
                         onInputChange={onHandleInputChange}
                         onKeyDown={onHandleKeyDown}
                         name="emails"
-                        className="w-6/12"
+                        className="email-select w-6/12"
                         placeholder="Emails to invite"
                         inputValue={inputValue}
                         value={emailOptions}

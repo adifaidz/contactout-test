@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
         ]);
 
         $referredBy = Cookie::get('referral');
-        $referer = $referredBy ?? User::firstWhere('referral_code', $referredBy);
+        $referer = User::firstWhere('referral_code', $referredBy);
 
         $user = User::create([
             'name' => $request->name,

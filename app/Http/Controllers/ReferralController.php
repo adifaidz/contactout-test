@@ -15,6 +15,9 @@ class ReferralController extends Controller
     public function index() {
         return Inertia::render('Referrals', [
             'referralCode' => Auth::user()->referral_code,
+            'referralPoint' => Auth::user()->referral_point,
+            'invites' => Auth::user()->referralInvites,
+            'referees' => Auth::user()->referees,
         ]);
     }
 
