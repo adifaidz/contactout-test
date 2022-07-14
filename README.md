@@ -4,6 +4,14 @@ This project uses [Laravel 8](https://laravel.com/docs/8.x), [InertiaJS](https:/
 
 For testing,  it mainly uses [Pest](https://pestphp.com/) (aside from the scaffolded Laravel Breeze tests) and [Laravel Dusk](https://laravel.com/docs/8.x/dusk#main-content) for e2e testing.
 
+For demo on the application and brief explanation on the code refer to these:
+
+- Application Demo:
+    - [Part One](https://share.vidyard.com/watch/Ea5zioYnB2d9TcUNy1eEkW?)
+    - [Part Two](https://share.vidyard.com/watch/hM9USawLVPDLKnvWb9Cqha?)
+- Code and design decision:
+    - [Part One](https://share.vidyard.com/watch/DukngfacTuZ5AbdxSKP3SU?)
+    - [Part Two](https://share.vidyard.com/watch/VXB8B2YbnWihPej9dNDnZg?)
 ## First time setup
 Once done pulling the repo :
 - Run `composer install`
