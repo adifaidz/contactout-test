@@ -1,50 +1,55 @@
-# Coding Challenge
+# README 
+## Introduction
+This project uses [Laravel 8](https://laravel.com/docs/8.x), [InertiaJS](https://inertiajs.com/), [React](https://reactjs.org/) and [Tailwind](https://tailwindcss.com/). All the auths related stuff had been scaffolded using L[aravel Breeze](https://laravel.com/docs/8.x/starter-kits#laravel-breeze).
 
-The main goal of this challenge is to get a sense of your coding style and choices.
+For testing,  it mainly uses [Pest](https://pestphp.com/) (aside from the scaffolded Laravel Breeze tests) and [Laravel Dusk](https://laravel.com/docs/8.x/dusk#main-content) for e2e testing.
 
-The code challenge does not involve any exotic or bleeding-edge technologies, tools, etc. and that’s the point: We’d like to focus on your code style and not get distracted.
+## First time setup
+Once done pulling the repo :
+- Run `composer install`
+- Setup the environment variables in `.env` ( Most important database stuffs )
+- Run `npm install && npm run dev`
+- Run `php artisan queue:work` if queueing is enabled
+- Finally run `php artisan serve` or any equivalent command to start your laravel server.
 
-On that note, we’re also not looking for "rights and wrongs", and there are no "trick parts" in this challenge. We would merely like to get a more profound impression of how you write code.
+## How to test
+To run test you can these commands:
+```
+// To run feature and unit tests
+./vendor/bin/pest
 
-That also allows us to have a more fruitful and constructive discussion at the technical interview. We’re not fans of white-boarding at interviews, so we’d much rather have some concrete code to talk about. We think that makes the interview much more enjoyable and productive.
+// To run e2e tests ( Laravel Dusk )
+php artisan pest:dusk
+```
 
+To configure testing environment, you can refer to this [Laravel Documentation](https://laravel.com/docs/8.x/testing#environment)
 
-# Your challenge/task
+## Features
 
-Develop a referrals feature using Laravel 8 and React. This feature is heavily inspired by Dropbox's referral https://www.dropbox.com/referrals so it would be a great reference for this task. For every successful referral (meaning you get a user to sign up using your referral link), you will get one point.
+### Key features
 
-## Task Specifications
+####  Auth
+- User can register and login
+- User must verify email
+- User can reset password
 
-* Allow users to login and register
-* Develop a new page `<domain>/referrals` to show a form where the user can input multiple emails to invite.
-* Ideally, the front-end should be written in react or should use a react component where the input is a multi-select _similar to dropbox_.
-* Send an email notification to the invited email. The email's content doesn't have to be fancy, it can contain a simple instruction and link to the registration page with the referral link `<domain>/?refer=<code>`
-* Track successful referrals - when a user signs up from a referral link, increase the number of referrals count of the referrer.
+#### Referral
+- User has referral code on register ( configurable length)
+- User can invite multiple emails
+- User cannot invite existing users
+- User cannot reinvite already invited emails
+- User can gain 1 point with each successful referral
+- User has a limit of 10 point ( configurable limit)
 
-## Notes
-* Users who are invited already cannot be invited again.
-* Existing users cannot be invited.
-* A user can have a maximum of 10 successful referral points.
+### Events and Notifications
+This app uses events and notifications . Here's a list of them:
 
-## Bonus Points
-* Create a new page for an admin user `<domain>/admin/referrals` that shows the list of all the referrals made in the system. Columns can be referrer, email referred, date, status
+#### Events
+- Registered
+    - SendEmailVerificationNotification 
+    - UpdateSuccessReferral
 
-## Invite Email
-**Subject**
-<first_name> recommends ContactOut
-
-**Body**
-<first_name> has been using ContactOut, and thinks it could be of use for you.  
-  
-Here’s their invitation link for you:  
-<referral_link>
-  
-ContactOut gives you access to contact details for about 75% of the world’s professionals.  
-  
-Great for recruiting, sales, and marketing outreach.  
-  
-It’s an extension that works right on top of LinkedIn.  
-  
-Here’s their invitation link again:  
-<referral_link>
-
+#### Notifications
+- VerifyEmail
+- ReferralInvitation
+- ReferralSuccessEmail
